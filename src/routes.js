@@ -60,7 +60,8 @@ const dashboardRoutes = [
     icon: "content_paste",
     component: TableList,
     layout: "/admin"
-  },
+  }
+  /*,
   {
     path: "/typography",
     name: "Typography",
@@ -92,7 +93,8 @@ const dashboardRoutes = [
     icon: Notifications,
     component: NotificationsPage,
     layout: "/admin"
-  },
+  }
+  ,
   {
     path: "/rtl-page",
     name: "RTL Support",
@@ -109,6 +111,7 @@ const dashboardRoutes = [
     component: UpgradeToPro,
     layout: "/admin"
   }
+  */
 ];
 
 export default dashboardRoutes;
