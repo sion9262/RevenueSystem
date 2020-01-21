@@ -1,11 +1,14 @@
 import React from 'react';
 
-export default function Login () {
+const Login = ({check, setCheckLogin}) => {
+
 
     return (
         <div>
-            <h2>LoginPage</h2>
+            {check}
+            <button onClick={ setCheckLogin}>로그인</button>
         </div>
     )
-
 }
+
+export default Login;

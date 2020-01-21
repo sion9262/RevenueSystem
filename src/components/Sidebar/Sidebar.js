@@ -76,6 +76,7 @@ export default function Sidebar(props) {
               />
             </ListItem>
           </NavLink>
+          
         );
       })}
     </List>
@@ -147,6 +148,7 @@ export default function Sidebar(props) {
           ) : null}
         </Drawer>
       </Hidden>
+    
     </div>
   );
 }
