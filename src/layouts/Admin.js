@@ -17,8 +17,9 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
-import Auth from "views/Passport/Login.js";
+
 let ps;
+
 
 const switchRoutes = (
   <Switch>
@@ -50,6 +51,7 @@ export default function Admin({ ...rest }) {
   const [color, setColor] = React.useState("blue");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [jwt, setJwt] = useState('');
   const handleImageClick = image => {
     setImage(image);
   };
@@ -75,14 +77,16 @@ export default function Admin({ ...rest }) {
     }
   };
 
-  const [checkLogin, setCheckLogin] = useState(0)
+  const [checkLogin, setCheckLogin] = useState(false)
   
-  const handleCheckLogin = () => {
+  
+  
+  const handleCheckLogin = (text) => {
       console.log(checkLogin)
-      setCheckLogin(1)
+      setJwt(text)
   }
   const handleLogout = () => {
-    setCheckLogin(0)
+    setCheckLogin(false)
   }
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
@@ -104,6 +108,7 @@ export default function Admin({ ...rest }) {
   }, [mainPanel]);
   return (
     <div className={classes.wrapper}>
+      {}
       <Sidebar
         routes={routes}
         logoText={"Creative Tim"}
@@ -114,8 +119,6 @@ export default function Admin({ ...rest }) {
         color={color}
         {...rest}
       />
-      {
-        checkLogin ? (
           <div className={classes.mainPanel} ref={mainPanel}>
             <Navbar
               routes={routes}
@@ -124,12 +127,17 @@ export default function Admin({ ...rest }) {
               {...rest}
             />
             {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-            {getRoute() ? (
-              <div className={classes.content}>
-                <div className={classes.container}>{switchRoutes}</div>
-              </div>
+            {jwt ? (
+              getRoute() ? (
+                <div className={classes.content}>
+                  <div className={classes.container}>{switchRoutes}</div>
+                </div>
+              ) : (
+                <div className={classes.map}>{switchRoutes}</div>
+              )
+            
             ) : (
-              <div className={classes.map}>{switchRoutes}</div>
+              <Redirect to="Auth"/>
             )}
             {getRoute() ? <Footer /> : null}
             {/* 
@@ -143,15 +151,7 @@ export default function Admin({ ...rest }) {
             />
             */}
           </div>
-        ) : (
-          <div className={classes.mainPanel} ref={mainPanel}>
-            <Auth
-              check = {checkLogin}
-              setCheckLogin = {handleCheckLogin}
-            />
-          </div>
-        )
-      }
+      
       
     </div>
   );
